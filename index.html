@@ -1,52 +1,118 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мій односторінковий сайт</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: white;
-      text-align: center;
-      padding: 50px 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для Олесі ❤️</title>
 
-    h1 {
-      font-size: 40px;
-    }
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff4e8a, #ff758c);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
 
-    p {
-      font-size: 20px;
-      max-width: 600px;
-      margin: 20px auto;
-    }
+.container {
+    max-width: 650px;
+    padding: 30px;
+}
 
-    .btn {
-      display: inline-block;
-      padding: 15px 30px;
-      background: white;
-      color: #2a5298;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-      margin-top: 20px;
-      transition: 0.3s;
-    }
+h1 {
+    font-size: 44px;
+    margin-bottom: 20px;
+}
 
-    .btn:hover {
-      background: #ddd;
-    }
-  </style>
+.name {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    animation: glow 2s infinite alternate;
+}
+
+p {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    background: white;
+    color: #ff4e8a;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ffe3ec;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    color: #fff;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 25px #fff, 0 0 40px #ffb6c1; }
+}
+</style>
 </head>
+
 <body>
 
-  <h1>Ласкаво просимо 🚀</h1>
-  <p>Це моя окрема односторінкова сторінка. Тут можна розмістити будь-яку інформацію, кнопку або форму.</p>
+<div class="container">
+    <h1>З Днем Святого Валентина 💖</h1>
+    <div class="name">Олеся ❤️</div>
+    <p>
+        Моя найрідніша Олесю,  
+        ти — найкраще, що сталося в моєму житті.  
+        Дякую тобі за тепло, підтримку і щирість.  
+        Я неймовірно щасливий, що ти поруч.
+    </p>
+    <button onclick="showMessage()">Натисни сюди 💌</button>
+</div>
 
-  <a href="#" class="btn">Дізнатись більше</a>
+<script>
+function showMessage() {
+    alert("Олеся, я тебе дуже сильно люблю ❤️");
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createHeart, 400);
+</script>
 
 </body>
 </html>
