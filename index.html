@@ -9,55 +9,77 @@
 body {
     margin: 0;
     padding: 0;
+    background: linear-gradient(135deg, #ff6a8a, #ff99ac);
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ff4e8a, #ff758c);
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    text-align: center;
-    color: white;
-    overflow: hidden;
 }
 
-.container {
-    max-width: 650px;
-    padding: 30px;
-}
-
-h1 {
-    font-size: 44px;
-    margin-bottom: 20px;
-}
-
-.name {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    animation: glow 2s infinite alternate;
-}
-
-p {
-    font-size: 20px;
-    line-height: 1.6;
-}
-
-button {
-    margin-top: 30px;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 30px;
-    font-size: 18px;
+/* Конверт */
+.envelope {
+    width: 320px;
+    height: 200px;
+    background: #fff;
+    position: relative;
     cursor: pointer;
+    transition: transform 1s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.envelope:before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-bottom: 100px solid #fff;
+    transform-origin: bottom;
+    transition: transform 1s ease;
+}
+
+.envelope-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 80px;
+    font-weight: bold;
+    color: #e91e63;
+}
+
+/* Валентинка */
+.card {
+    position: absolute;
+    width: 90%;
+    max-width: 600px;
     background: white;
-    color: #ff4e8a;
-    transition: 0.3s;
+    padding: 30px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    transform: scale(0);
+    transition: transform 1s ease;
 }
 
-button:hover {
-    background: #ffe3ec;
+.card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 20px;
 }
 
+.message {
+    font-size: 20px;
+    color: #e91e63;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+/* Сердечка */
 .heart {
     position: absolute;
     font-size: 20px;
@@ -70,48 +92,48 @@ button:hover {
     50% { opacity: 1; }
     100% { transform: translateY(-10vh); opacity: 0; }
 }
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px white; }
-    to { text-shadow: 0 0 25px #fff, 0 0 40px #ffb6c1; }
-}
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>З Днем Святого Валентина 💖</h1>
-    <div class="name">Олеся ❤️</div>
-    <p>
-        Моя найрідніша Олесю,  
-        ти — найкраще, що сталося в моєму житті.  
-        Дякую тобі за тепло, підтримку і щирість.  
-        Я неймовірно щасливий, що ти поруч.
-    </p>
-    <button onclick="showMessage()">Натисни сюди 💌</button>
+<div class="envelope" onclick="openCard()">
+    <div class="envelope-text">Для Олесі з України 💌</div>
 </div>
 
+<div class="card" id="card">
+    <img src="photo.jpg" alt="Наше фото">
+    <div class="message">
+Вітаю тебе красуння з днем Святого Валентина.  
+Дуже сильно кохаю тебе і скучаю за тобою.  
+Надію скоро вже прийдуть ті часи коли всі світанки  
+ми будемо зустрічати разом ❤️
+    </div>
+</div>
+
+<audio id="music" src="music.mp3"></audio>
+
 <script>
-function showMessage() {
-    alert("Олеся, я тебе дуже сильно люблю ❤️");
+function openCard() {
+    document.querySelector(".envelope").style.transform = "scale(0)";
+    const card = document.getElementById("card");
+    card.style.transform = "scale(1)";
+    document.getElementById("music").play();
+    startHearts();
 }
 
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
-    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 6000);
+function startHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 400);
 }
-
-setInterval(createHeart, 400);
 </script>
 
 </body>
